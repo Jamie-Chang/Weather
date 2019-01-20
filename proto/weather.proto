@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package weather;
+
+message WeatherRequest {
+}
+
+message WeatherReply {
+    float temperature = 1;
+}
+
+service Checker {
+    rpc check_weather (WeatherRequest) returns (WeatherReply) {}
+}
