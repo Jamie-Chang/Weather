@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='weather',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x13proto/weather.proto\x12\x07weather\"\x10\n\x0eWeatherRequest\"#\n\x0cWeatherReply\x12\x13\n\x0btemperature\x18\x01 \x01(\x02\x32L\n\x07\x43hecker\x12\x41\n\rcheck_weather\x12\x17.weather.WeatherRequest\x1a\x15.weather.WeatherReply\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x13proto/weather.proto\x12\x07weather\"\x1d\n\x0eWeatherRequest\x12\x0b\n\x03\x65nd\x18\x01 \x01(\x08\"#\n\x0cWeatherReply\x12\x13\n\x0btemperature\x18\x01 \x01(\x02\x32\x94\x01\n\x07\x43hecker\x12\x41\n\rcheck_weather\x12\x17.weather.WeatherRequest\x1a\x15.weather.WeatherReply\"\x00\x12\x46\n\x0estream_weather\x12\x17.weather.WeatherRequest\x1a\x15.weather.WeatherReply\"\x00(\x01\x30\x01\x62\x06proto3')
 )
 
 
@@ -32,6 +32,13 @@ _WEATHERREQUEST = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='end', full_name='weather.WeatherRequest.end', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -45,7 +52,7 @@ _WEATHERREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=32,
-  serialized_end=48,
+  serialized_end=61,
 )
 
 
@@ -75,8 +82,8 @@ _WEATHERREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=50,
-  serialized_end=85,
+  serialized_start=63,
+  serialized_end=98,
 )
 
 DESCRIPTOR.message_types_by_name['WeatherRequest'] = _WEATHERREQUEST
@@ -105,13 +112,22 @@ _CHECKER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=87,
-  serialized_end=163,
+  serialized_start=101,
+  serialized_end=249,
   methods=[
   _descriptor.MethodDescriptor(
     name='check_weather',
     full_name='weather.Checker.check_weather',
     index=0,
+    containing_service=None,
+    input_type=_WEATHERREQUEST,
+    output_type=_WEATHERREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='stream_weather',
+    full_name='weather.Checker.stream_weather',
+    index=1,
     containing_service=None,
     input_type=_WEATHERREQUEST,
     output_type=_WEATHERREPLY,

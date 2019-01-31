@@ -3,6 +3,7 @@ syntax = "proto3";
 package weather;
 
 message WeatherRequest {
+    bool end = 1;
 }
 
 message WeatherReply {
@@ -11,4 +12,5 @@ message WeatherReply {
 
 service Checker {
     rpc check_weather (WeatherRequest) returns (WeatherReply) {}
+    rpc stream_weather (stream WeatherRequest) returns (stream WeatherReply) {}
 }

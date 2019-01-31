@@ -15,11 +15,21 @@ class CheckerBase(abc.ABC):
     async def check_weather(self, stream):
         pass
 
+    @abc.abstractmethod
+    async def stream_weather(self, stream):
+        pass
+
     def __mapping__(self):
         return {
             '/weather.Checker/check_weather': grpclib.const.Handler(
                 self.check_weather,
                 grpclib.const.Cardinality.UNARY_UNARY,
+                proto.weather_pb2.WeatherRequest,
+                proto.weather_pb2.WeatherReply,
+            ),
+            '/weather.Checker/stream_weather': grpclib.const.Handler(
+                self.stream_weather,
+                grpclib.const.Cardinality.STREAM_STREAM,
                 proto.weather_pb2.WeatherRequest,
                 proto.weather_pb2.WeatherReply,
             ),
@@ -32,6 +42,12 @@ class CheckerStub:
         self.check_weather = grpclib.client.UnaryUnaryMethod(
             channel,
             '/weather.Checker/check_weather',
+            proto.weather_pb2.WeatherRequest,
+            proto.weather_pb2.WeatherReply,
+        )
+        self.stream_weather = grpclib.client.StreamStreamMethod(
+            channel,
+            '/weather.Checker/stream_weather',
             proto.weather_pb2.WeatherRequest,
             proto.weather_pb2.WeatherReply,
         )
